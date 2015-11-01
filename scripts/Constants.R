@@ -1,7 +1,7 @@
 
 #Declare constants
 cDept <- c("FINANCIAL SERVICES"          ,"SHOES"                       ,"PERSONAL CARE"               ,"PAINT AND ACCESSORIES"       ,"DSD GROCERY"                 ,"MEAT - FRESH & FROZEN",      
-           "DAIRY"                       ,"PETS AND SUPPLIES"           ,"HOUSEHOLD CHEMICALS/SUPP"                           ,"IMPULSE MERCHANDISE"         ,"PRODUCE"                    ,
+           "DAIRY"                       ,"PETS AND SUPPLIES"           ,"HOUSEHOLD CHEMICALS/SUPP"    ,"IMPULSE MERCHANDISE"         ,"PRODUCE"                     ,"HEALTH AND BEAUTY AIDS",
            "CANDY, TOBACCO, COOKIES"     ,"GROCERY DRY GOODS"           ,"BOYS WEAR"                   ,"FABRICS AND CRAFTS"          ,"JEWELRY AND SUNGLASSES"      ,"MENS WEAR"                  ,
            "ACCESSORIES"                 ,"HOME MANAGEMENT"             ,"FROZEN FOODS"                ,"SERVICE DELI"                ,"INFANT CONSUMABLE HARDLINES" ,"PRE PACKED DELI"            ,
            "COOK AND DINE"               ,"PHARMACY OTC"                ,"LADIESWEAR"                  ,"COMM BREAD"                  ,"BAKERY"                      ,"HOUSEHOLD PAPER GOODS"      ,
@@ -11,7 +11,7 @@ cDept <- c("FINANCIAL SERVICES"          ,"SHOES"                       ,"PERSON
            "ELECTRONICS"                 ,"GIRLS WEAR, 4-6X  AND 7-14"  ,"BRAS & SHAPEWEAR"            ,"LIQUOR,WINE,BEER"            ,"SLEEPWEAR/FOUNDATIONS"       ,"CAMERAS AND SUPPLIES"       ,
            "SPORTING GOODS"              ,"PLAYERS AND ELECTRONICS"     ,"PHARMACY RX"                 ,"MENSWEAR"                    ,"OPTICAL - FRAMES"            ,"SWIMWEAR/OUTERWEAR"         ,
            "OTHER DEPARTMENTS"           ,"MEDIA AND GAMING"            ,"FURNITURE"                   ,"OPTICAL - LENSES"            ,"SEASONAL"                    ,"LARGE HOUSEHOLD GOODS"      ,
-           "1-HR PHOTO"                  ,"CONCEPT STORES"              ,"HEALTH AND BEAUTY AIDS"     )
+           "1-HR PHOTO"                  ,"CONCEPT STORES"                  )
 cDept <- as.data.frame(cDept)
 
 cWeekDay <- c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")

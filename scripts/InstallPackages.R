@@ -1,0 +1,6 @@
+install.packages("sqldf")
+install.packages("randomForest")
+install.packages("dplyr")
+install.packages("R.utils")
+install.packages("stringi")
+install.packages("ggplot2")

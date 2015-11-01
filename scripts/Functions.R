@@ -1,6 +1,6 @@
-deriveDeptType <- function(dt){
+deriveDeptType <- function(dtObj){
   
-  dt = within(dt, {
+  dtObj = within(dtObj, {
     Dept_1 = ifelse(DeptType == 1, ScanCount * 1, 0)
     Dept_2 = ifelse(DeptType == 2, ScanCount * 1, 0)
     Dept_3 = ifelse(DeptType == 3, ScanCount * 1, 0)
@@ -72,7 +72,7 @@ deriveDeptType <- function(dt){
     Dept_69 = ifelse(DeptType == 69, ScanCount * 1, 0)
     
   })
-  return(dt)
+  return(dtObj)
 }
 
 

@@ -14,10 +14,10 @@ dt <- read.csv("data/train.csv")
 dtest <- read.csv("data/test.csv")
 
 #Load files
-source("scripts/Constants.R")
-source("scripts/Functions.R")
-source("scripts/DataProcess.R")
-
+source("scripts/constants/Constants.R")
+source("scripts/utils/Utils.R")
+source("scripts/DeptTypeProcessor.R")
+#source("scripts/FinelineProcessor.R")
 
 
 #Start music

@@ -1,4 +1,4 @@
-source("scripts/DataSetup.R")
+source("scripts/utils/DataSetup.R")
 
 #Build the randomForestClassifier
 clf <- randomForest(factor(label) ~ ., data=wdata, ntree=300,keep.forest=TRUE)

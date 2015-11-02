@@ -7,6 +7,7 @@ library(sqldf)
 library(randomForest)
 library(dplyr)
 library(R.utils)
+library(tidyr)
 
 
 #Read the values into Data Frames
@@ -56,21 +57,16 @@ dtestRetAgg <- sqldf('select VisitNumber, max(WeekdayNum) as WeekdayNum, sum(Sca
                      from dtest  where ScanCount < 0 group by VisitNumber')
 
 #Aggregate
-dtrainBuyRetAgg <- merge(dtrainBuyAgg,dtrainRetAgg,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-#dBuyFinelineNumer <- deriveBuyFinelineNumer(dt);
-#dRetFinelineNumer <- deriveRetFinelineNumer(dt);
+source("scripts/FinelineProcessor.R")
 
-#dtrainBuyRetBuyFinlineAgg <- merge(dtrainBuyRetAgg,dBuyFinelineNumer,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-#dtrainAgg <- merge(dtrainBuyRetBuyFinlineAgg,dRetFinelineNumer,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-dtrainAgg <- dtrainBuyRetAgg
+dFineDt <- processFineline(dt)
+dtestFineDt <- processFineline(dtest)
+
+dtrainBuyRetAgg <- merge(dtrainBuyAgg,dtrainRetAgg,by="VisitNumber", all.x = TRUE, all.y = TRUE)
+dtrainAgg <- merge(dtrainBuyRetAgg,dFineDt,by="VisitNumber", all.x = TRUE, all.y = TRUE)
 
 dtestBuyRetAgg <- merge(dtestBuyAgg,dtestRetAgg,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-#dBuyTestFinelineNumer <- deriveBuyTestFinelineNumer(dt);
-#dRetTestFinelineNumer <- deriveRetTestFinelineNumer(dt);
-
-#dtestBuyRetBuyFinlineAgg <- merge(dtestBuyRetAgg,dBuyTestFinelineNumer,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-#dtestAgg <- merge(dtestBuyRetBuyFinlineAgg,dRetTestFinelineNumer,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-dtestAgg <-dtestBuyRetAgg
+dtestAgg <- merge(dtestBuyRetAgg,dtestFineDt,by="VisitNumber", all.x = TRUE, all.y = TRUE)
 
 
 dtrainAgg$TripTypeNorm <- ifelse(is.na(dtrainAgg$TripType.x), match(dtrainAgg$TripType.y, cTrip), match(dtrainAgg$TripType.x, cTrip))

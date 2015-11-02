@@ -1,3 +1,4 @@
+#setwd("./ml")
 source("scripts/utils/DataSetup.R")
 
 #Build the randomForestClassifier

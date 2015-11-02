@@ -11,7 +11,7 @@ processFineline <- function(dt){
   tBuyDf <- select(tBuy, VisitNumber, DeptType, uniBuy)
   tBuyDf <- as.data.frame(tBuyDf)
   tBuyDfDt <- spread(tBuyDf, DeptType, uniBuy)
-  
+  colnames(tBuyDfDt) = paste("A", colnames(tBuyDfDt), sep="")
   
   tt <- filter(dt, ScanCount <0)
   tt <- group_by(tt, VisitNumber, DeptType)
@@ -19,7 +19,8 @@ processFineline <- function(dt){
   tRetDf <- select(tRet, VisitNumber, DeptType, uniRet)
   tRetDf <- as.data.frame(tRetDf)
   tRetDfDt <- spread(tRetDf, DeptType, uniRet)
+  colnames(tRetDfDt) = paste("A", colnames(tRetDfDt), sep="")
   
-  dFineLine <- merge(tBuyDfDt,tRetDfDt,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-  return (dFineline)
+  dFineLine <- merge(tBuyDfDt,tRetDfDt,by="AVisitNumber", all.x = TRUE, all.y = TRUE)
+  return (dFineLine)
 }

@@ -63,10 +63,10 @@ dFineDt <- processFineline(dt)
 dtestFineDt <- processFineline(dtest)
 
 dtrainBuyRetAgg <- merge(dtrainBuyAgg,dtrainRetAgg,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-dtrainAgg <- merge(dtrainBuyRetAgg,dFineDt,by="VisitNumber", all.x = TRUE, all.y = TRUE)
+dtrainAgg <- merge(dtrainBuyRetAgg,dFineDt,by.x="VisitNumber", by.y="AVisitNumber",all.x = TRUE, all.y = TRUE)
 
 dtestBuyRetAgg <- merge(dtestBuyAgg,dtestRetAgg,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-dtestAgg <- merge(dtestBuyRetAgg,dtestFineDt,by="VisitNumber", all.x = TRUE, all.y = TRUE)
+dtestAgg <- merge(dtestBuyRetAgg,dtestFineDt,by.x="VisitNumber", by.y="AVisitNumber", all.x = TRUE, all.y = TRUE)
 
 
 dtrainAgg$TripTypeNorm <- ifelse(is.na(dtrainAgg$TripType.x), match(dtrainAgg$TripType.y, cTrip), match(dtrainAgg$TripType.x, cTrip))
@@ -77,9 +77,8 @@ dtestAgg$WeekdayNum <- ifelse(is.na(dtestAgg$WeekdayNum.x), dtestAgg$WeekdayNum.
 dtrainAgg[is.na(dtrainAgg)] <- 0
 dtestAgg[is.na(dtestAgg)] <- 0
 
-dtrainAgg$data <- subset(dtrainAgg, , -c(TripType.x, VisitNumber, WeekdayNum.x, TripTypeNorm, TripType.y, WeekdayNum.y))
-dtestAgg$data <- subset(dtestAgg, , -c(VisitNumber, WeekdayNum.y, WeekdayNum.x))
+dtrainAgg$data <- subset(dtrainAgg, , -c(AVisitNumber, TripType.x, VisitNumber, WeekdayNum.x, TripTypeNorm, TripType.y, WeekdayNum.y))
+dtestAgg$data <- subset(dtestAgg, , -c(AVisitNumber, VisitNumber, WeekdayNum.y, WeekdayNum.x))
 
 wdata <- as.matrix(dtrainAgg$data)
-label <- as.numeric(dtrainAgg$TripTypeNorm)
 labelFactor <- as.factor(as.numeric(dtrainAgg$TripTypeNorm))

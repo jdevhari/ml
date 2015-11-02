@@ -96,5 +96,5 @@ cGroupMatDept <- as.data.frame( rbind (
   )))
 
 
-cGroupDept <- cGroupSingleDept
+cGroupDept <- cGroupMatDept
 colnames(cGroupDept) <- c("DeptType","DepartmentDescription")

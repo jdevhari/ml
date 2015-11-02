@@ -1,7 +1,7 @@
 source("scripts/DataSetup.R")
 
 #Build the randomForestClassifier
-clf <- randomForest(factor(label) ~ ., data=wdata, ntree=150,keep.forest=TRUE)
+clf <- randomForest(factor(label) ~ ., data=wdata, ntree=300,keep.forest=TRUE)
 
 #Run the Prediction
 predprob = predict(clf, dtestAgg$data, type="prob")

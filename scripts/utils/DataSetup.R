@@ -62,11 +62,12 @@ dFineDt <- processFineline(dt)
 dtestFineDt <- processFineline(dtest)
 
 dtrainBuyRetAgg <- merge(dtrainBuyAgg,dtrainRetAgg,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-dtrainAgg <- merge(dtrainBuyRetAgg,dFineDt,by.x="VisitNumber", by.y="AVisitNumber",all.x = TRUE, all.y = TRUE)
+#dtrainAgg <- merge(dtrainBuyRetAgg,dFineDt,by.x="VisitNumber", by.y="AVisitNumber",all.x = TRUE, all.y = TRUE)
+dtrainAgg <- dtrainBuyRetAgg
 
 dtestBuyRetAgg <- merge(dtestBuyAgg,dtestRetAgg,by="VisitNumber", all.x = TRUE, all.y = TRUE)
-dtestAgg <- merge(dtestBuyRetAgg,dtestFineDt,by.x="VisitNumber", by.y="AVisitNumber", all.x = TRUE, all.y = TRUE)
-
+#dtestAgg <- merge(dtestBuyRetAgg,dtestFineDt,by.x="VisitNumber", by.y="AVisitNumber", all.x = TRUE, all.y = TRUE)
+dtestAgg <- dtestBuyRetAgg
 
 dtrainAgg$TripTypeNorm <- ifelse(dtrainAgg$TripType.x == 0, match(dtrainAgg$TripType.y, cTrip), match(dtrainAgg$TripType.x, cTrip))
 dtrainAgg$WeekdayNum <- ifelse(is.na(dtrainAgg$WeekdayNum.x), dtrainAgg$WeekdayNum.y, dtrainAgg$WeekdayNum.x)

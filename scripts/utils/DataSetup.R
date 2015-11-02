@@ -10,15 +10,14 @@ library(R.utils)
 library(tidyr)
 
 
-#Read the values into Data Frames
-dt <- read.csv("data/train.csv")
-dtest <- read.csv("data/test.csv")
+
 
 #Load files
 source("scripts/constants/Constants.R")
 source("scripts/utils/Utils.R")
 source("scripts/DeptTypeProcessor.R")
 #source("scripts/FinelineProcessor.R")
+
 
 
 #Start music
@@ -69,7 +68,7 @@ dtestBuyRetAgg <- merge(dtestBuyAgg,dtestRetAgg,by="VisitNumber", all.x = TRUE, 
 dtestAgg <- merge(dtestBuyRetAgg,dtestFineDt,by.x="VisitNumber", by.y="AVisitNumber", all.x = TRUE, all.y = TRUE)
 
 
-dtrainAgg$TripTypeNorm <- ifelse(is.na(dtrainAgg$TripType.x), match(dtrainAgg$TripType.y, cTrip), match(dtrainAgg$TripType.x, cTrip))
+dtrainAgg$TripTypeNorm <- ifelse(dtrainAgg$TripType.x == 0, match(dtrainAgg$TripType.y, cTrip), match(dtrainAgg$TripType.x, cTrip))
 dtrainAgg$WeekdayNum <- ifelse(is.na(dtrainAgg$WeekdayNum.x), dtrainAgg$WeekdayNum.y, dtrainAgg$WeekdayNum.x)
 dtestAgg$WeekdayNum <- ifelse(is.na(dtestAgg$WeekdayNum.x), dtestAgg$WeekdayNum.y, dtestAgg$WeekdayNum.x)
 
@@ -77,8 +76,8 @@ dtestAgg$WeekdayNum <- ifelse(is.na(dtestAgg$WeekdayNum.x), dtestAgg$WeekdayNum.
 dtrainAgg[is.na(dtrainAgg)] <- 0
 dtestAgg[is.na(dtestAgg)] <- 0
 
-dtrainAgg$data <- subset(dtrainAgg, , -c(AVisitNumber, TripType.x, VisitNumber, WeekdayNum.x, TripTypeNorm, TripType.y, WeekdayNum.y))
-dtestAgg$data <- subset(dtestAgg, , -c(AVisitNumber, VisitNumber, WeekdayNum.y, WeekdayNum.x))
+dtrainAgg$data <- subset(dtrainAgg, , -c( TripType.x, VisitNumber, WeekdayNum.x, TripTypeNorm, TripType.y, WeekdayNum.y))
+dtestAgg$data <- subset(dtestAgg, , -c( VisitNumber, WeekdayNum.y, WeekdayNum.x))
 
 wdata <- as.matrix(dtrainAgg$data)
 labelFactor <- as.factor(as.numeric(dtrainAgg$TripTypeNorm))
